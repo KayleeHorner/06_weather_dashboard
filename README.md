@@ -2,7 +2,10 @@
 For this project, we had to create a weather dashboard with data that would persist. 
 
 # Links
-Deployed App:https://kayleehorner.github.io/06_weather_dashboard/
+### Deployed App:
+https://kayleehorner.github.io/06_weather_dashboard/
+
+###
 GitHub Repo: https://github.com/KayleeHorner/06_weather_dashboard
 
 # Still Struggling With...
