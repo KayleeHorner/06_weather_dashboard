@@ -1,89 +1,113 @@
 <!DOCTYPE html>
 <html lang="en-us">
-
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather Dashboard</title>
+    <title>My Weather</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./Assets/style.css">
-    
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;700&family=Montserrat:wght@100;200;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./Assets/style.css" />
   </head>
 
   <body>
-    <nav class="navbar navbar-light bg-light">
-      <span class="text-center" id="header">Weather Dashboard</span>
+    <nav>
+      <span id="header">My Weather</span>
     </nav>
+    <main>
+      <div id="date"></div>
+      <div class="container">
+        <div id="search-col">
+          <div class="input-group">
+            <p id="search">Search for a City:</p>
+            <form id="search-bar" method="POST">
+              <input
+                type="text"
+                name="search-text"
+                id="search-text"
+                class="form-control"
+              />
+              <a type="submit" class="btn" id="submit">
+                <span class="material-icons"> search </span>
+              </a>
+            </form>
+            <p class="list"></p>
+          </div>
+        </div>
 
-    <div class="p-5">
-      <main class="container bg-white">
-        <div class="row">
-          <div class="col-md-3" id="search-col">
-            <h5 id="search" class="mt-4 ml-4">Search for a City:</h5>
-            <div class="input-group mt-3 ml-4">
-              <br>
+        <!-- Tab links -->
+        <div class="content">
+          <div class="tab">
+            <button
+              class="tablinks"
+              onclick="openType(event, 'weather-now')"
+              id="defaultOpen"
+            >
+              Weather Now
+            </button>
+            <button class="tablinks" onclick="openType(event, 'whats-ahead')">
+              What's Ahead
+            </button>
+          </div>
+
+          <!-- Tab content -->
+          <div id="weather-now" class="tabcontent">
+            <div class="full-current">
               
-              <form id="search-bar" method="POST">
-                <input type="text" name="search-text" id="search-text" class="form-control"/>
-                <button type="submit" class="btn mt-2" id="submit">Search <i class="fa fa-search"></i></button>
-              </form>
-              <p class="list mt-4"></p>
+              <span id="city-name"></span>
+              <span class="icon"></span>
+
+              <div id="current-forecast">
+                <p class="current"></p>
+                
+                <span class="uvi uvi-card"></span>
+                <span>UV Index</span>
+              </div>
             </div>
           </div>
 
-          <div class="col-md-9 full-current">
-            <div class="ml-4 mt-4">
-              <div id="city-name"></div>
-              <card class="icon"></card>
-              <div id="date"></div>
-            <hr/>
-          </div>
-      
-          <div class="ml-4 mr-4" id="current-forecast">
-            <p class="current"></p>
-            <p class="uvi"></p>
-          </div>
-          <br><br>
-          <div class="row">
-           <div class="mr-4 ml-4 col-md-8">
-            <div id="forecast-heading">Your Next 5 Days</div>
-            <p class="mr-4 5-day"></p>
-          </div>
-            
+          <div id="whats-ahead" class="tabcontent">
+            <div>
+              <div id="forecast-heading">Your Next 5 Days</div>
+              <p class="5-day "></p>
+            </div>
           </div>
         </div>
-      </main>
-    </div>    
+      </div>
+    </main>
+    <script>
+      // Get the element with id="defaultOpen" and click on it
+      document.getElementById("defaultOpen").click();
+    </script>
 
-  
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous">
-    </script>
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
       integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-      crossorigin="anonymous">
-    </script>
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
       integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous">
-    </script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js">
-    </script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    </script>
-    <script 
-      src="./Assets/script.js">
-    </script>
-
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./Assets/script.js"></script>
   </body>
 </html>

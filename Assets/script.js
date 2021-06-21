@@ -52,7 +52,7 @@ $(document).ready(function () {
       var iconCode = response.weather[0].icon;
       var iconLink = "https://openweathermap.org/img/w/" + iconCode + ".png";
 
-      $("#city-name").html("<h1>" + response.name + "</h1>");
+      $("#city-name").html("<span>" + response.name + "</span>");
       $("#date").html("<h3>" + moment().format("MMMM Do, YYYY") + "</h3>");
       $(".icon").append($("<img>").attr("src", iconLink));
       $(".current").append(
@@ -82,15 +82,15 @@ $(document).ready(function () {
         var setUVColor = $(".uvi");
         console.log(uviQueryURL);
         if (uvi >= 0 && uvi <= 2.99) {
-          setUVColor.css("background-color", "green");
+          setUVColor.css("color", "#90d484");
         } else if (uvi >= 3 && uvi <= 6.99) {
-          setUVColor.css("background-color", "yellow");
+          setUVColor.css("background-color", "#F1EE73");
         } else if (uvi >= 7 && uvi <= 8.99) {
-          setUVColor.css("background-color", "orange");
+          setUVColor.css("background-color", "#F1AC73");
         } else {
-          setUVColor.css("background-color", "red");
+          setUVColor.css("background-color", "#F17373");
         }
-        setUVColor.append("UV Index: " + uvi);
+        setUVColor.append(uvi);
       });
     });
   }
@@ -109,7 +109,7 @@ $(document).ready(function () {
     }).then(function (response) {
       for (i = 0; i < 5; i++) {
         console.log(response);
-        var newCard = $("<div>").attr("class", "col-md-8 p-2");
+        var newCard = $("<div>");
         var date = new Date();
         var deterDate =
           date.getMonth() +
@@ -122,7 +122,7 @@ $(document).ready(function () {
         var iconCode = response.list[i].weather[0].icon;
         var iconLink = "https://openweathermap.org/img/w/" + iconCode + ".png";
 
-        $(".5-day").append("<hr/>");
+      
         $(".5-day").append(newCard);
         $(".5-day").append($("<img>").attr("src", iconLink));
         $(".5-day").append(addDate);
@@ -152,6 +152,7 @@ $(document).ready(function () {
     }
 
     getHistory();
+
     searchCity(city);
     forecast(city);
 
@@ -160,14 +161,16 @@ $(document).ready(function () {
 
   function buildButton() {
     $(".list").empty();
+  
     for (var i = 0; i <= 6; i++) {
       if (pastArray[i]) {
         var links = $("<button>")
           .attr("class", "city btn")
           .attr("search-text", pastArray[i])
           .text(pastArray[i]);
+          
 
-        $(".list").append(links);
+        $(".list").append("</br>").append(links);
       }
     }
   }
@@ -180,3 +183,26 @@ $(document).ready(function () {
     clear();
   });
 });
+
+
+// tab code 
+function openType(event, forecastType) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(forecastType).style.display = "block";
+  event.currentTarget.className += " active";
+}
