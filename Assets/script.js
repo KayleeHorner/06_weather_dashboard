@@ -95,7 +95,7 @@ $(document).ready(function () {
     });
   }
 
-  // Function for 5 Day Forecast
+  // Function for 5 Day Forecast -- adding change to trigger
   function forecast(city) {
     var queryURL =
       "https://api.openweathermap.org/data/2.5/forecast?q=" +
